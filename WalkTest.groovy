@@ -9,7 +9,7 @@ println "found: "+dev
 if(args==null){
 	if(dev==null){
 		//Create the kinematics model from the xml file describing the D-H compliant parameters. 
-		def file=["https://gist.github.com/bcb4760a449190206170.git","CarlTheRobot.xml"]as String[]
+		def file=["https://github.com/madhephaestus/carl-the-hexapod.git","CarlTheRobot.xml"]as String[]
 		String xmlContent = ScriptingEngine.codeFromGit(file[0],file[1])[0]
 		MobileBase mb =new MobileBase(IOUtils.toInputStream(xmlContent, "UTF-8"))
 		mb.setGitSelfSource(file)
