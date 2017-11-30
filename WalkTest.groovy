@@ -3,11 +3,11 @@ import  com.neuronrobotics.bowlerstudio.physics.*;
 import com.neuronrobotics.bowlerstudio.threed.*;
 
 MobileBase base;
-Object dev = DeviceManager.getSpecificDevice(MobileBase.class, "jaguar");
+Object dev = DeviceManager.listConnectedDevice(MobileBase.class);
 println "found: "+dev
 //Check if the device already exists in the device Manager
 if(args==null){
-	if(dev==null){
+	if(dev.size()==0){
 		//Create the kinematics model from the xml file describing the D-H compliant parameters. 
 		def file=["https://github.com/madhephaestus/carl-the-hexapod.git","CarlTheRobot.xml"]as String[]
 		String xmlContent = ScriptingEngine.codeFromGit(file[0],file[1])[0]
@@ -25,7 +25,7 @@ if(args==null){
 	}else{
 		println "Robot found, runing code"
 		//the device is already present on the system, load the one that exists.
-	  	base=(MobileBase)dev
+	  	base=DeviceManager.getSpecificDevice(dev.get(0))
 	}
 }else
 	base=(MobileBase)args.get(0)
