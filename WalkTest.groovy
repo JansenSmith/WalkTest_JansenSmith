@@ -5,17 +5,13 @@ import com.neuronrobotics.bowlerstudio.threed.*;
 def base;
 //Check if the device already exists in the device Manager
 if(args==null){
-	base=DeviceManager.getSpecificDevice( "CarlTheWalkingRobot",{
-			//If the device does not exist, prompt for the connection
-			
-			MobileBase m = MobileBaseLoader.fromGit(
-				"https://github.com/madhephaestus/carl-the-hexapod.git",
-				"CarlTheRobot.xml"
-				)
-			if(m==null)
-				throw new RuntimeException("Arm failed to assemble itself")
-			println "Connecting new device robot arm "+m
-			return m
+	base=DeviceManager.getSpecificDevice( "MediumKat",{
+			return ScriptingEngine.gitScriptRun(	"https://github.com/OperationSmallKat/SmallKat_V2.git", 
+											"loadRobot.groovy", 
+											[ "https://github.com/OperationSmallKat/greycat.git",
+											  "MediumKat.xml",
+											  "GameController_22"]
+			  )
 		})
 }else
 	base=args.get(0)
